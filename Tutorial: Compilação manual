@@ -5,7 +5,9 @@
   $ sudo apt-get install build-essential cmake cmake-curses-gui libopenmpi-dev openmpi-bin libfftw3-dev libblas-dev liblapack-dev pkg-config ffmpeg python3-dev
   
   $ sudo apt install python3-pip python3.10-venv python3-venv
-  
+
+  $ sudo apt install git
+
   $ git clone -b stable https://github.com/lammps/lammps.git lammps
 Terá algo assim:
       Cloning into 'lammps'...
@@ -22,6 +24,8 @@ Seguindo:
   $ mkdir build
 
   $ cd build
+
+Na linha a baixo substitua USER pelo nome do seu usuário:
 
   $ cmake -D CMAKE_INSTALL_PREFIX=/home/USER/lammps/lammps-install ../cmake/
 
@@ -84,11 +88,12 @@ Abra o diretório home/ com
 
   $ cd
   $ vim .bashrc
-No final do arquivo crie uma nova linha e insira a o seguinte:
+
+No final do arquivo crie uma nova linha e insira a o seguinte (substitua USER pelo nome do seu usuário):
 
   $ export PATH=$PATH:/home/USER/lammps/lammps-install/bin
 
-sendo o caminho aquele que você copiou umas 5 linhas acima.
+
 Salve e saia.
 Execute
   $ source .bashrc
