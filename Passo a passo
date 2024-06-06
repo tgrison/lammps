@@ -28,7 +28,7 @@ Seguindo:
 Se der certo aparecerá isso no final:
     -- Configuring done
     -- Generating done
-    -- Build files have been written to: /home/tlg/lammps/build
+    -- Build files have been written to: /home/USER/lammps/build
 
 Agora digite:
 
@@ -42,13 +42,13 @@ Digite:
 OBS: Se o seu processador for pouco potente (tiver menos de 4 núcleos) pode trocar o "-j4" por "-j". Isso só vai alterar o tempo.
 
 Se der certo aparecerá isso no final:
-      [ 98%] Building CXX object CMakeFiles/lammps.dir/home/tlg/lammps/src/write_coeff.cpp.o
-      [ 98%] Building CXX object CMakeFiles/lammps.dir/home/tlg/lammps/src/write_data.cpp.o
-      [ 98%] Building CXX object CMakeFiles/lammps.dir/home/tlg/lammps/src/write_dump.cpp.o
-      [100%] Building CXX object CMakeFiles/lammps.dir/home/tlg/lammps/src/write_restart.cpp.o
+      [ 98%] Building CXX object CMakeFiles/lammps.dir/home/USER/lammps/src/write_coeff.cpp.o
+      [ 98%] Building CXX object CMakeFiles/lammps.dir/home/USER/lammps/src/write_data.cpp.o
+      [ 98%] Building CXX object CMakeFiles/lammps.dir/home/USER/lammps/src/write_dump.cpp.o
+      [100%] Building CXX object CMakeFiles/lammps.dir/home/USER/lammps/src/write_restart.cpp.o
       [100%] Linking CXX static library liblammps.a
       [100%] Built target lammps
-      [100%] Building CXX object CMakeFiles/lmp.dir/home/tlg/lammps/src/main.cpp.o
+      [100%] Building CXX object CMakeFiles/lmp.dir/home/USER/lammps/src/main.cpp.o
       [100%] Linking CXX executable lmp
       [100%] Built target lmp
 
