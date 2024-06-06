@@ -1,0 +1,52 @@
+  $ sudo apt-get update
+
+  $ sudo apt-get upgrade
+
+  $ sudo apt-get install build-essential cmake cmake-curses-gui libopenmpi-dev openmpi-bin libfftw3-dev libblas-dev liblapack-dev pkg-config ffmpeg python3-dev
+  
+  $ sudo apt install python3-pip python3.10-venv python3-venv
+  
+  $ git clone -b stable https://github.com/lammps/lammps.git lammps
+
+  $ cd lammps
+
+  $ mkdir build
+
+  $ cd build
+
+  $ cmake -D CMAKE_INSTALL_PREFIX=/home/USER/lammps/lammps-install ../cmake/
+
+  $ ccmake ../cmake
+
+Ativar pacotes trocando de OFF para ON e após cada pacote clicar em [c]. Para sair clicar [q].
+
+  $ make -j4
+
+  $ sudo make install -j
+Execute o comando 
+  $ pwd
+e copie o caminho.
+
+  $ ls
+
+Verá o executável do LAMMPS lmp que podera ser executado com
+  $ ./lmp
+
+se digitar fora deste diretório não funcionará, para isso vamos criar o atalho:
+Abra o diretório home/ com
+
+  $ cd
+  $ vim .bashrc
+No final do arquivo crie uma nova linha e insira a o seguinte:
+
+  $ export PATH=$PATH:/home/USER/lammps/build
+
+sendo o caminho aquele que você copiou umas 5 linhas acima.
+Salve e saia.
+Execute
+  $ source .bashrc
+
+Agora poderá executar lmp em qualquer pasta.
+
+  $ lmp
+
