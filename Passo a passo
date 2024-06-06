@@ -1,13 +1,22 @@
   $ sudo apt-get update
 
-  $ sudo apt-get upgrade
+  $ sudo apt-get upgrade -y
 
   $ sudo apt-get install build-essential cmake cmake-curses-gui libopenmpi-dev openmpi-bin libfftw3-dev libblas-dev liblapack-dev pkg-config ffmpeg python3-dev
   
   $ sudo apt install python3-pip python3.10-venv python3-venv
   
   $ git clone -b stable https://github.com/lammps/lammps.git lammps
-
+Terá algo assim:
+      Cloning into 'lammps'...
+      remote: Enumerating objects: 387573, done.
+      remote: Counting objects: 100% (2496/2496), done.
+      remote: Compressing objects: 100% (1246/1246), done.
+      remote: Total 387573 (delta 1500), reused 2146 (delta 1242), pack-reused 385077
+      Receiving objects: 100% (387573/387573), 710.07 MiB | 20.29 MiB/s, done.
+      Resolving deltas: 100% (324530/324530), done.
+      Updating files: 100% (12818/12818), done.
+Seguindo:
   $ cd lammps
 
   $ mkdir build
@@ -16,30 +25,68 @@
 
   $ cmake -D CMAKE_INSTALL_PREFIX=/home/USER/lammps/lammps-install ../cmake/
 
+Se der certo aparecerá isso no final:
+    -- Configuring done
+    -- Generating done
+    -- Build files have been written to: /home/tlg/lammps/build
+
+Agora digite:
+
   $ ccmake ../cmake
 
-Ativar pacotes trocando de OFF para ON e após cada pacote clicar em [c]. Para sair clicar [q].
+Aqui é a tela para ativar pacotes. Desta vez apenas clique em [c] e depois [q] sem alterar nada. No final terá o tutorial para ativar novos pacotes.
+Digite:
 
   $ make -j4
 
-  $ sudo make install -j
-Execute o comando 
-  $ pwd
-e copie o caminho.
+OBS: Se o seu processador for pouco potente (tiver menos de 4 núcleos) pode trocar o "-j4" por "-j". Isso só vai alterar o tempo.
 
+Se der certo aparecerá isso no final:
+      [ 98%] Building CXX object CMakeFiles/lammps.dir/home/tlg/lammps/src/write_coeff.cpp.o
+      [ 98%] Building CXX object CMakeFiles/lammps.dir/home/tlg/lammps/src/write_data.cpp.o
+      [ 98%] Building CXX object CMakeFiles/lammps.dir/home/tlg/lammps/src/write_dump.cpp.o
+      [100%] Building CXX object CMakeFiles/lammps.dir/home/tlg/lammps/src/write_restart.cpp.o
+      [100%] Linking CXX static library liblammps.a
+      [100%] Built target lammps
+      [100%] Building CXX object CMakeFiles/lmp.dir/home/tlg/lammps/src/main.cpp.o
+      [100%] Linking CXX executable lmp
+      [100%] Built target lmp
+
+Seguindo:
+
+  $ sudo make install -j
+
+Se der certo aparecerá coisas desse tipo:
+      -- Installing: /home/USER/lammps/lammps-install/share/lammps/potentials/W_2940_2017_2.snapcoeff
+      -- Installing: /home/USER/lammps/lammps-install/share/lammps/potentials/W_2940_2017_2.snapparam
+      -- Installing: /home/USER/lammps/lammps-install/share/lammps/potentials/W_2940_2017_2_He_JW2013.snap
+      -- Installing: /home/USER/lammps/lammps-install/share/lammps/potentials/W_He_JW2013.table
+      -- Installing: /home/USER/lammps/lammps-install/share/lammps/potentials/W_zhou.eam.alloy
+      -- Installing: /home/USER/lammps/lammps-install/share/lammps/potentials/Zn.rann
+      -- Installing: /home/USER/lammps/lammps-install/share/lammps/potentials/Zr.rann
+      -- Installing: /home/USER/lammps/lammps-install/share/lammps/potentials/Zr_mm.eam.fs
+      -- Installing: /home/USER/lammps/lammps-install/etc/profile.d/lammps.sh
+      -- Installing: /home/USER/lammps/lammps-install/etc/profile.d/lammps.csh
+
+Digite:
   $ ls
 
-Verá o executável do LAMMPS lmp que podera ser executado com
+Verá o executável do LAMMPS "lmp" que podera ser executado com
   $ ./lmp
+Se der certo aparecerá coisas desse tipo:
+        LAMMPS (2 Aug 2023 - Update 3)
+        OMP_NUM_THREADS environment is not set. Defaulting to 1 thread. (src/comm.cpp:98)
+          using 1 OpenMP thread(s) per MPI task
 
-se digitar fora deste diretório não funcionará, para isso vamos criar o atalho:
+Para sair pressione [CTRL]+[C]
+Porém se digitar fora deste diretório não funcionará, para isso vamos criar o atalho:
 Abra o diretório home/ com
 
   $ cd
   $ vim .bashrc
 No final do arquivo crie uma nova linha e insira a o seguinte:
 
-  $ export PATH=$PATH:/home/USER/lammps/build
+  $ export PATH=$PATH:/home/USER/lammps/lammps-install/bin
 
 sendo o caminho aquele que você copiou umas 5 linhas acima.
 Salve e saia.
@@ -49,4 +96,33 @@ Execute
 Agora poderá executar lmp em qualquer pasta.
 
   $ lmp
+E o lammps abrirá:
+        LAMMPS (2 Aug 2023 - Update 3)
+        OMP_NUM_THREADS environment is not set. Defaulting to 1 thread. (src/comm.cpp:98)
+          using 1 OpenMP thread(s) per MPI task
+Para sair pressione [CTRL]+[C]
 
+Na hora de executar talvez aparecam erros do tipo:
+        LAMMPS (2 Aug 2023 - Update 3)
+        OMP_NUM_THREADS environment is not set. Defaulting to 1 thread. (src/comm.cpp:98)
+          using 1 OpenMP thread(s) per MPI task
+        ERROR: Unrecognized atom style 'full' is part of the MOLECULE package which is not enabled in this LAMMPS binary. (src/atom.cpp:727)
+        Last command: atom_style     full
+
+Está falando que falta um pacote. Neste casso é o pacote MOLECULE. Vamos instalá-lo.
+
+Para instalar os pacotes volte no diretório 
+  $ cd /home/USER/lammps/build
+E execute novamente
+  $ ccmake ../cmake
+Ativar pacotes trocando de OFF para ON e após cada pacote clicar em [c], um por vez (ON -> [c] -> ON -> [c] ...). Para sair clicar [q].
+Novamente execute as linhas
+  $ make -j4
+  $ sudo make install -j
+E pronto. A próxima vez que chamar lmp, o lammps já estará com os novos pacotes.
+
+
+
+Esse tutorial é uma adaptação de
+https://youtu.be/Id3eVPDinDE?si=FRlTpz4dEHnzWr3m
+https://implant.fs.cvut.cz/lammps-gpu-compile/
